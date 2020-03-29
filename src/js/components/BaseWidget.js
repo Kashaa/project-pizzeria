@@ -48,5 +48,4 @@ export class BaseWidget {
 
     thisWidget.dom.wrapper.dispatchEvent(event);
   }
-
 }
