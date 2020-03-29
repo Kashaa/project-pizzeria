@@ -1,12 +1,14 @@
-import { select, settings } from '../settings.js';
+import {select, settings} from '../settings.js';
 import { BaseWidget } from './BaseWidget.js';
 
-export class AmountWidget extends BaseWidget {
-  constructor(wrapper) {
+export class AmountWidget extends BaseWidget{
+  constructor(wrapper){
     super(wrapper, settings.amountWidget.defaultValue);
+    
     const thisWidget = this;
+    
     thisWidget.getElements();
-    // thisWidget.value = settings.amountWidget.defaultValue;
+    thisWidget.value = settings.amountWidget.defaultValue;
     // thisWidget.setValue(thisWidget.input.value);
     thisWidget.initActions();
     // console.log('AmountWidget:', thisWidget);
@@ -23,29 +25,26 @@ export class AmountWidget extends BaseWidget {
   /* method not nedded because of BaseWidget.js
   setValue(value) {
     const thisWidget = this;
-
     const newValue = parseInt(value);
-
-    // value validation
+    //value validation
     if (newValue != thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
       thisWidget.value = newValue;
       thisWidget.announce();
     }
-
     thisWidget.input.value = thisWidget.value;
-    console.log(thisWidget.value);
+    // console.log(thisWidget.value);
   }
   */
 
-  isValid(newValue) {
-    return !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax;
-  }
+ isValid(newValue){
+  return !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax;
+}
 
   initActions() {
     const thisWidget = this;
     thisWidget.dom.input.addEventListener('change', function () {
       thisWidget.value = thisWidget.dom.input.value;
-    // console.log(thisWidget.input.value);
+      // console.log(thisWidget.input.value);
     });
     thisWidget.dom.linkDecrease.addEventListener('click', function () {
       thisWidget.value = thisWidget.dom.value--;
@@ -54,15 +53,16 @@ export class AmountWidget extends BaseWidget {
       thisWidget.value = thisWidget.dom.value++;
     });
   }
+
   /* method not nedded because of BaseWidget.js
-  announce() {
-    const thisWidget = this;
-    const event = new CustomEvent('updated', {
-      bubbles: true
-    });
-    thisWidget.element.dispatchEvent(event);
-  }
-  */
+    announce() {
+      const thisWidget = this;
+      const event = new CustomEvent('updated', {
+        bubbles: true
+      });
+      thisWidget.element.dispatchEvent(event);
+    }
+    */
 
   renderValue() {
     const thisWidget = this;

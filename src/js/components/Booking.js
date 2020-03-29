@@ -90,7 +90,7 @@ export class Booking {
     const thisBooking = this;
 
     thisBooking.booked = {};
-    console.log('eventsCurrent', eventsCurrent);
+    // console.log('eventsCurrent', eventsCurrent);
 
     for (let event of eventsCurrent) {
       console.log(event);
@@ -120,7 +120,7 @@ export class Booking {
     if (typeof (thisBooking.booked[date]) == 'undefined') {
       thisBooking.booked[date] = {};
     }
-    // console.log(thisBooking.booked[date]);
+    console.log(thisBooking.booked[date]);
 
     const bookedHour = utils.hourToNumber(hour);
 
