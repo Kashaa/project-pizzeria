@@ -47,10 +47,10 @@ export class AmountWidget extends BaseWidget{
       // console.log(thisWidget.input.value);
     });
     thisWidget.dom.linkDecrease.addEventListener('click', function () {
-      thisWidget.value = thisWidget.dom.value--;
+      thisWidget.value = thisWidget.value -1;
     });
     thisWidget.dom.linkIncrease.addEventListener('click', function () {
-      thisWidget.value = thisWidget.dom.value++;
+      thisWidget.value = thisWidget.value +1;
     });
   }
 
