@@ -49,6 +49,7 @@ export class Booking {
     thisBooking.dom.wrapper.addEventListener('submit', function () {
       event.preventDefault();
       thisBooking.sendBooking();
+      thisBooking.getData();
     });
   }
 
@@ -180,6 +181,7 @@ export class Booking {
           console.log('this table is booked now');
         }
       });
+      thisBooking.rangeSliderColour();
     }
   }
 
@@ -189,6 +191,8 @@ export class Booking {
 
     const url = settings.db.url + '/' + settings.db.booking;
 
+    thisBooking.hour = utils.numberToHour(thisBooking.hour);
+    
     const bookingPayload = {
       date: thisBooking.date,
       hour: thisBooking.hour,
@@ -223,5 +227,30 @@ export class Booking {
         thisBooking.updateDOM();
       });
   }
-}
 
+  rangeSliderColour() {
+    const thisBooking = this;
+    const bookedHours = thisBooking.booked[thisBooking.date];
+    const sliderColours = [];
+
+    thisBooking.dom.rangeSlider = thisBooking.dom.wrapper.querySelector('.rangeSlider');
+    const slider = thisBooking.dom.rangeSlider;
+
+    for (let bookedHour in bookedHours) {
+      const firstOfInterval = ((bookedHour - 12) * 100) / 12;
+      const secondOfInterval = (((bookedHour - 12) + .5) * 100) / 12;
+      if (bookedHour < 24) {
+        if (bookedHours[bookedHour].length <= 1) {
+          sliderColours.push('/*' + bookedHour + '*/green ' + firstOfInterval + '%, green ' + secondOfInterval + '%');
+        } else if (bookedHours[bookedHour].length === 2) {
+          sliderColours.push('/*' + bookedHour + '*/orange ' + firstOfInterval + '%, orange ' + secondOfInterval + '%');
+        } else if (bookedHours[bookedHour].length === 3) {
+          sliderColours.push('/*' + bookedHour + '*/red ' + firstOfInterval + '%, red ' + secondOfInterval + '%');
+        }
+      }
+    }
+    sliderColours.sort();
+    const liveColours = sliderColours.join();
+    slider.style.background = 'linear-gradient(to right, ' + liveColours + ')';
+  }
+}
