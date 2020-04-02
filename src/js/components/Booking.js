@@ -100,14 +100,15 @@ export class Booking {
     const thisBooking = this;
 
     thisBooking.booked = {};
-    // console.log('eventsCurrent', eventsCurrent);
+    console.log('eventsCurrent', eventsCurrent);
 
     for (let event of eventsCurrent) {
-      console.log(event);
+      console.log('event from eventsCurrent', event);
       thisBooking.makeBooked(event.date, event.hour, event.duration, event.table);
     }
 
     for (let event of bookings) {
+      console.log('event from bookings', event);
       thisBooking.makeBooked(event.date, event.hour, event.duration, event.table);
     }
 
@@ -115,13 +116,14 @@ export class Booking {
     const maxDate = thisBooking.datePicker.maxDate;
 
     for (let event of eventsRepeat) {
+      console.log('event from eventsRepeat', event);
       if (event.repeat == 'daily') {
         for (let eventDate = minDate; eventDate <= maxDate; eventDate = utils.addDays(eventDate, 1)) {
           thisBooking.makeBooked(utils.dateToStr(eventDate), event.hour, event.duration, event.table);
-          // console.log(eventDate);
         }
       }
     }
+    console.log('thisBooking.booked', thisBooking.booked);
     thisBooking.updateDOM();
   }
 
