@@ -130,7 +130,7 @@ const app = {
         },
         {
           title: 'Very tasty.',
-          content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur quia ab, vero nam magnam velit molestias quos amet quidem quaerat rem alias a. Id quam, cupiditate praesentium maxime tempora facere?',
+          content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur quia ab, vero nam magnam velit molestias quos amet quidem quaerat rem alias a.',
           author: '- Pizza Lover'
         }
       ],

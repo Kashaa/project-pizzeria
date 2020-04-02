@@ -223,8 +223,7 @@ export class Booking {
         return response.json();
       }).then(function (parsedResponse) {
         console.log('parsedResponse', parsedResponse);
-        thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
-        thisBooking.updateDOM();
+        thisBooking.makeBooked(bookingPayload.date, bookingPayload.hour, bookingPayload.table, bookingPayload.duration);
       });
   }
 
