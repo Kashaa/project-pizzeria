@@ -13,6 +13,7 @@
         "test:html": "globstar nu-html-checker dist/*.html",
         "test:js": "eslint src/js/",
         "test:scss": "stylelint src/sass/",
+        "fixJS": "eslint src/js/ --fix",
         "build": "npm-run-all build:* test",
         "build:clean": "mkdirp dist",
         "build:copy": "copyfiles -a -u 1 -e \"**/sass/**/*\" -e \"**/.gitkeep\" \"src/**/*\" dist",

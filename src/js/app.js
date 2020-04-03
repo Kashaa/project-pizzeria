@@ -111,11 +111,23 @@ const app = {
 
   initCarousel: function () {
     /* global Mustache */
-
+ 
     const appContainer = document.querySelector('#carousel');
     const template = document.querySelector('#template_carousel').innerHTML;
     let id = 0;
-
+    let autoSlideIndex = 0;
+    const maxSlideIndex = 2;
+ 
+    setInterval(() => {
+      changeSlide(autoSlideIndex);
+ 
+      if (autoSlideIndex === maxSlideIndex) {
+        autoSlideIndex = 0;
+      } else {
+        autoSlideIndex++;
+      }
+    }, 3000);
+ 
     const data = {
       carousel: [
         {
@@ -129,41 +141,47 @@ const app = {
           author: '- Ozzy Osborne'
         },
         {
-          title: 'Very tasty.',
+          title: 'Very tasty:)',
           content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur quia ab, vero nam magnam velit molestias quos amet quidem quaerat rem alias a.',
           author: '- Pizza Lover'
         }
       ],
       idx: () => id++
     };
-
+ 
     const outputHTML = Mustache.render(template, data);
     appContainer.innerHTML = outputHTML;
-
+ 
     const items = document.querySelectorAll('.slide');
     const links = document.querySelectorAll('.carousel-dots-item');
-
+ 
     items[0].classList.add('active');
     links[0].classList.add('active');
-
+ 
     console.log(links);
-
+ 
     for (let link of links) {
       link.addEventListener('click', e => {
         const element = e.currentTarget;
         const index = element.getAttribute('data-index');
-
-        for (let item of items) {
-          item.classList.remove('active');
-        }
-
-        for (let l of links) {
-          l.classList.remove('active');
-        }
-
-        items[index].classList.add('active');
-        element.classList.add('active');
+ 
+        changeSlide(index);
+ 
+        autoSlideIndex = index;
       });
+    }
+ 
+    function changeSlide(index) {
+      for (let item of items) {
+        item.classList.remove('active');
+      }
+ 
+      for (let l of links) {
+        l.classList.remove('active');
+      }
+ 
+      items[index].classList.add('active');
+      links[index].classList.add('active');
     }
   },
 
